@@ -129,6 +129,40 @@ tr.me td{background:color-mix(in srgb,var(--accent) 14%,transparent);font-weight
 .coach{margin:0 0 14px;font-size:1.05rem}
 @media (max-width:760px){.lineup{grid-template-columns:minmax(0,1fr)}}
 
+
+nav.main{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:thin}
+nav.main a{flex:none;font:500 .8rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg);padding:14px 14px 12px;border-bottom:3px solid transparent}
+nav.main a:hover{color:var(--accent)}
+nav.main a[aria-current="page"]{border-bottom-color:var(--gold);color:var(--accent);font-weight:500}
+.page[hidden]{display:none}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
+.fact{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:14px 16px;min-width:0}
+.fact b{display:block;font-family:var(--f-display);font-size:1.7rem;line-height:1.1;text-transform:uppercase}
+.fact span{display:block;font:400 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.timeline{list-style:none;margin:0;padding:0;border-left:3px solid var(--gold);margin-left:6px}
+.timeline li{position:relative;padding:0 0 22px 22px;max-width:720px}
+.timeline li::before{content:"";position:absolute;left:-10px;top:8px;width:16px;height:16px;background:var(--bg);border:3px solid var(--accent);border-radius:50%}
+.timeline .y{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
+.timeline p{margin:2px 0 0}
+.table-scroll.flat{max-height:none;border:0}
+.years{display:flex;flex-wrap:wrap;gap:8px}
+.years span{font:500 .9rem var(--f-mono);border:1px solid var(--line);padding:6px 10px;font-variant-numeric:tabular-nums;background:var(--tint)}
+.years span.gold{border-color:var(--gold)}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
+.rank li{display:grid;grid-template-columns:1.8rem minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+.rank li:last-child{border-bottom:0}
+.rank .r{font:500 .8rem var(--f-mono);color:var(--muted)}
+.rank .v{font:500 1rem var(--f-mono);font-variant-numeric:tabular-nums}
+.rank li:first-child .v{color:var(--accent);font-size:1.3rem}
+.rank li:first-child .nm{font-weight:600}
+.rank small{font:400 .7rem var(--f-mono);color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.tile{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--gold);padding:16px;min-width:0}
+.tile b{display:block;font-family:var(--f-display);font-weight:700;font-size:3rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.tile span{display:block;margin-top:6px;font-size:.98rem;line-height:1.35}
+.tile small{display:block;margin-top:4px;font:400 .72rem var(--f-mono);color:var(--muted)}
+.panel h3{font-family:var(--f-display);text-transform:uppercase;font-size:1.5rem;margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--gold)}
+.panel p{margin:.5em 0}
 /* šedé vysvětlivky se nezobrazují */
 .note,.legal,.status{display:none}
 footer{margin-top:56px;border-top:3px solid var(--gold);padding-block:24px 36px;font:400 .76rem/1.6 var(--f-mono);color:var(--muted)}
@@ -147,7 +181,14 @@ footer p{margin:0 0 8px}
     </div>
     <button class="btn" id="theme" type="button" aria-label="Přepnout světlý a tmavý režim">Režim</button>
   </header>
+  <nav class="main" aria-label="Hlavní nabídka">
+    <a href="#domu" data-nav="domu">Domů</a>
+    <a href="#zapasy" data-nav="zapasy">Zápasy a tabulky</a>
+    <a href="#sestava" data-nav="sestava">Sestava</a>
+    <a href="#o-realu" data-nav="o-realu">O Realu Madrid</a>
+  </nav>
 
+  <div class="page" data-page="domu">
   <section class="hero" id="hero">
     <div>
       <div class="label">Real Madrid C.F. · Madrid, od 6. 3. 1902</div>
@@ -202,7 +243,9 @@ footer p{margin:0 0 8px}
       </div>
     </div>
   </section>
+  </div>
 
+  <div class="page" data-page="zapasy" hidden>
   <section class="block" aria-labelledby="h-res">
     <div class="label">Formulář a tabulky</div>
     <h2 id="h-res">Výsledky a tabulky</h2>
@@ -225,7 +268,9 @@ footer p{margin:0 0 8px}
     <div class="panel"><ul class="plain up" id="upcoming"></ul></div>
     <p class="note">Šance na výhru Realu je přepočtená z kurzů (bez marže sázkové kanceláře). U zápasů bez kurzů se šance nezobrazuje.</p>
   </section>
+  </div>
 
+  <div class="page" data-page="sestava" hidden>
   <section class="block" aria-labelledby="h-squad">
     <div class="label">Sezóna 2026/27</div>
     <h2 id="h-squad">Sestava</h2>
@@ -241,6 +286,60 @@ footer p{margin:0 0 8px}
     </div>
     <p class="note">Zdroj dává jen jedenáctku, ne rozestavění. Schéma 4-2-3-1 je odhad podle postů hráčů. Čísla dresů jsou podle beIN Sports předběžná.</p>
   </section>
+  </div>
+
+
+  <div class="page" data-page="o-realu" hidden>
+    <section class="hero">
+      <div>
+        <div class="label">Klub v číslech a příbězích</div>
+        <h1><span>O Realu</span><span class="blue">Madrid</span></h1>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="h-kv">
+      <div class="label">Základní údaje</div>
+      <h2 id="h-kv">Klub v kostce</h2>
+      <div class="facts" id="facts"></div>
+    </section>
+
+    <section class="block" aria-labelledby="h-tl">
+      <div class="label">Od roku 1902</div>
+      <h2 id="h-tl">Historie</h2>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
+
+    <section class="block" aria-labelledby="h-tr">
+      <div class="label">Vitrína</div>
+      <h2 id="h-tr">Trofeje</h2>
+      <div class="two">
+        <div class="panel"><div class="table-scroll flat"><table id="trophy-table"></table></div></div>
+        <div class="panel"><div class="label" style="margin-bottom:8px">Roky vítězství v Lize mistrů</div><div class="years" id="ucl-years"></div></div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="h-rec">
+      <div class="label">Nejlepší hráči všech dob</div>
+      <h2 id="h-rec">Rekordy hráčů</h2>
+      <div class="three" id="records"></div>
+    </section>
+
+    <section class="block" aria-labelledby="h-more">
+      <div class="label">Další rekordy</div>
+      <h2 id="h-more">Čísla, která stojí za zapamatování</h2>
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section class="block" aria-labelledby="h-pres">
+      <div class="label">Lidé a soupeři</div>
+      <h2 id="h-pres">Prezidenti a velká derby</h2>
+      <div class="two">
+        <div class="panel" id="presidents"></div>
+        <div class="panel" id="rivals"></div>
+      </div>
+    </section>
+  </div>
+
 
   <div class="status" id="status" aria-live="polite"></div>
 
@@ -483,7 +582,76 @@ loadLive();
 setInterval(loadLive, 5*60*1000);
 setInterval(renderNext, 60*1000);
 
-track('page_view',{page_title:document.title,page_location:location.href});
+/* ===== Stránka O Realu Madrid ===== */
+var FACTS = [
+  ['Založen','6. března 1902','jako Madrid Football Club'],
+  ['Název „Real“','1920','králem Alfonsem XIII. (odebráno 1931, vráceno 1941)'],
+  ['Stadion','Santiago Bernabéu','otevřen 14. 12. 1947, kapacita přes 80 000'],
+  ['Barvy','Bílá','tradiční bílé dresy, hostující bývají modré nebo fialové'],
+  ['Přezdívky','Los Blancos','Los Merengues, Reyes de Europa'],
+  ['Ocenění FIFA','Klub století','nejlepší klub 20. století podle FIFA'],
+  ['Vlastník','Členové klubu (socios)','klub nepatří investorovi'],
+  ['Prezident','Florentino Pérez','ve funkci od roku 2009 (poprvé 2000 až 2006)']
+];
+var TIMELINE = [
+  ['1902','Založení','Madrid Football Club vzniká 6. března. První prezident Julián Palacios, významnou roli hrají bratři Juan a Carlos Padrósovi.'],
+  ['1920','Královský titul','Král Alfonso XIII. uděluje klubu přídomek „Real“, od té doby Real Madrid.'],
+  ['1943','Éra Bernabéua','Santiago Bernabéu se stává prezidentem a vede klub téměř 35 let, až do své smrti v roce 1978.'],
+  ['1947','Nový stadion','14. prosince se otevírá stadion, který od roku 1955 nese Bernabéuovo jméno.'],
+  ['1956–1960','Pět pohárů v řadě','Real vyhrává prvních pět ročníků Evropského poháru mistrů. Hvězdami jsou Di Stéfano a Puskás.'],
+  ['1966','Šestý evropský titul','Pohár mistrů číslo šest vyhrávají hráči, kterým se přezdívalo „Ye-yé“.'],
+  ['1998–2002','Návrat na vrchol','Tituly v letech 1998, 2000 a 2002. V roce 2000 se prezidentem poprvé stává Florentino Pérez a začíná éra Galácticos.'],
+  ['2014','La Décima','Desátý titul v Lize mistrů. O dva roky později začíná série tří vítězství v řadě (2016, 2017, 2018).'],
+  ['2022–2024','Patnáctý titul','Real vyhrává Ligu mistrů v roce 2022 a znovu v roce 2024. Je to jeho patnáctý evropský titul.']
+];
+var TROPHIES = [['Liga mistrů / Evropský pohár',15,'rekord'],['La Liga',36,'rekord'],['Copa del Rey (Španělský pohár)',20,''],['Supercopa de España',13,''],['Superpohár UEFA',6,'rekord'],['Pohár UEFA',2,''],['Světové tituly (Interkontinentální pohár a MS klubů)',9,'rekord']];
+var UCL_YEARS = [1956,1957,1958,1959,1960,1966,1998,2000,2002,2014,2016,2017,2018,2022,2024];
+var REC = [
+  {t:'Nejlepší střelci', u:'góly, zápasy · stav k 4. 6. 2023', rows:[['Cristiano Ronaldo',450,'438 zápasů'],['Karim Benzema',354,'648'],['Raúl',323,'741'],['Alfredo Di Stéfano',308,'396'],['Santillana',290,'645'],['Ferenc Puskás',242,'262'],['Hugo Sánchez',208,'282'],['Paco Gento',183,'600'],['Pirri',171,'561'],['Emilio Butragueño',170,'463']]},
+  {t:'Nejvíc odehraných zápasů', u:'všechny soutěže · stav k 9. 7. 2025', rows:[['Raúl',741,''],['Iker Casillas',725,''],['Manolo Sanchís',710,''],['Sergio Ramos',671,''],['Karim Benzema',648,''],['Santillana',645,''],['Fernando Hierro',602,''],['Paco Gento',600,''],['Luka Modrić',597,''],['José Camacho',577,'']]},
+  {t:'Nejvíc asistencí', u:'podle kritérií Opta', rows:[['Míchel',201,''],['Paco Gento',165,''],['Karim Benzema',148,''],['Alfredo Di Stéfano',137,''],['Ferenc Puskás',133,''],['Juanito',123,''],['Amancio',120,''],['Cristiano Ronaldo',119,''],['Raúl',115,''],['Emilio Butragueño',109,'']]}
+];
+var TILES = [
+  ['61','gólů v jedné sezóně, rekord klubu','Cristiano Ronaldo, 2014/15'],
+  ['5 557','odehraných minut v jedné sezóně, rekord klubu','Federico Valverde, 2024/25'],
+  ['65','zápasů v jedné sezóně, rekord klubu','Federico Valverde, 2024/25'],
+  ['105','gólů v Lize mistrů, rekord klubu','Cristiano Ronaldo, 2009 až 2018'],
+  ['152','zápasů v Lize mistrů, rekord klubu','Iker Casillas'],
+  ['7','hattricků v Lize mistrů','Cristiano Ronaldo'],
+  ['17','gólů v jednom ročníku Ligy mistrů','Cristiano Ronaldo, 2013/14'],
+  ['11','zápasů v řadě s gólem v Lize mistrů','Cristiano Ronaldo, 2017/18'],
+  ['16 let','nejmladší hráč klubu (157 dní)','Martin Ødegaard, 2015'],
+  ['39 let','nejstarší hráč klubu (303 dní)','Luka Modrić, 2025']
+];
+function renderAbout(){
+  $('facts').innerHTML = FACTS.map(function(f){ return '<div class="fact"><span>'+esc(f[0])+'</span><b>'+esc(f[1])+'</b><small style="font-size:.9rem;color:var(--muted)">'+esc(f[2])+'</small></div>'; }).join('');
+  $('timeline').innerHTML = TIMELINE.map(function(t){ return '<li><div class="y">'+esc(t[0])+'</div><b>'+esc(t[1])+'</b><p>'+esc(t[2])+'</p></li>'; }).join('');
+  $('trophy-table').innerHTML = '<thead><tr><th>Soutěž</th><th class="n">Počet</th></tr></thead><tbody>'+TROPHIES.map(function(t){ return '<tr><td>'+esc(t[0])+(t[2]?' <span class="label" style="color:var(--gold)">· '+t[2]+'</span>':'')+'</td><td class="n"><b>'+t[1]+'</b></td></tr>'; }).join('')+'</tbody>';
+  $('ucl-years').innerHTML = UCL_YEARS.map(function(y){ return '<span'+(y<=1960?' class="gold"':'')+'>'+y+'</span>'; }).join('');
+  $('records').innerHTML = REC.map(function(r){
+    return '<div class="panel"><h3>'+esc(r.t)+'</h3><div class="label" style="margin-bottom:6px">'+esc(r.u)+'</div><ol class="plain rank" style="list-style:none;padding:0;margin:0">'+r.rows.map(function(x,i){ return '<li><span class="r">'+(i+1)+'.</span><span class="nm">'+esc(x[0])+(x[2]?' <small>'+esc(x[2])+'</small>':'')+'</span><span class="v">'+x[1]+'</span></li>'; }).join('')+'</ol></div>';
+  }).join('');
+  $('tiles').innerHTML = TILES.map(function(t){ return '<div class="tile"><b>'+esc(t[0])+'</b><span>'+esc(t[1])+'</span><small>'+esc(t[2])+'</small></div>'; }).join('');
+  $('presidents').innerHTML = '<h3>Prezidenti</h3><p><b>Santiago Bernabéu</b>, 1943 až 1978. Za téměř 35 let postavil stadion a vybudoval evropský úspěch klubu.</p><p><b>Lorenzo Sanz</b>, 1995 až 2000. Klub za něj vyhrál Ligu mistrů v letech 1998 a 2000.</p><p><b>Florentino Pérez</b>, 2000 až 2006 a znovu od 1. června 2009. Spojuje se s érou Galácticos a třemi tituly v Lize mistrů v řadě.</p>';
+  $('rivals').innerHTML = '<h3>Velká derby</h3><p><b>El Clásico</b> proti FC Barcelona patří k nejsledovanějším zápasům světa. Obě strany spolu hrají každou sezónu minimálně dvakrát v La Lize.</p><p><b>Madridské derby</b> proti Atléticu Madrid je souboj dvou klubů z jednoho města. Oba spolu hrají i v evropských pohárech.</p>';
+}
+renderAbout();
+
+/* ===== Navigace mezi stránkami ===== */
+var PAGES = ['domu','zapasy','sestava','o-realu'];
+function route(){
+  var h = location.hash.replace('#','');
+  if (PAGES.indexOf(h) < 0) h = 'domu';
+  document.querySelectorAll('.page').forEach(function(pg){ pg.hidden = pg.dataset.page !== h; });
+  document.querySelectorAll('nav.main a').forEach(function(a){
+    if (a.dataset.nav === h) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+  });
+  window.scrollTo(0,0);
+  track('page_view',{page_title:document.title+' / '+h,page_location:location.href});
+}
+window.addEventListener('hashchange',route);
+route();
+
 document.addEventListener('click',function(e){ var o=e.target.closest&&e.target.closest('.odd'); if(o) track('odds_click',{market:o.textContent}); });
 var seen = {};
 if ('IntersectionObserver' in window){
